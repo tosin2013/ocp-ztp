@@ -1,6 +1,6 @@
 # Deploy a Single Node OpenShift on libvirt using RHACM ZTP capabilities
 
-The goal is to leverage the latest capabilities from Red Hat Advanced Cluster Management (RHACM) 2.3 to deploy a Single Node OpenShift cluster using the Zero Touch Provisioning on an emulated bare metal environment.
+The goal is to leverage the latest capabilities from Red Hat Advanced Cluster Management (RHACM) 2.4 to deploy a Single Node OpenShift cluster using the Zero Touch Provisioning on an emulated bare metal environment.
 
 The typical Zero Touch Provisioning flow is meant to work for bare metal environment; but if like me, you don't have a bare metal environment handy, or want to optimize the only server you have, that blog is for you.
 
@@ -38,8 +38,8 @@ Let's align on the Zero Touch Provisioning expectation:
 
 ## Pre-requisite <a name="prerequisites"></a>
 
-- Red Hat OpenShift Container Platform __4.8__ for the hub cluster- see [here](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.8/html/installing/index) on how to deploy
-- Red Hat Advanced Cluster Management __2.3__ installed on the hub cluster- see [here](https://github.com/open-cluster-management/deploy#prepare-to-deploy-open-cluster-management-instance-only-do-once) on how to deploy
+- Red Hat OpenShift Container Platform __4.9__ for the hub cluster- see [here](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.9/html/installing/index) on how to deploy
+- Red Hat Advanced Cluster Management __2.4__ installed on the hub cluster- see [here](https://github.com/open-cluster-management/deploy#prepare-to-deploy-open-cluster-management-instance-only-do-once) on how to deploy
 - A server with at least 32GB of RAM, 8 CPUs and 120 GB of disk - this is the machine we will use for the spoke. Mine is setup with CentOS 8.4
 - Clone the git repo: `git clone https://github.com/adetalhouet/ocp-gitops`
 
@@ -56,19 +56,22 @@ In my case, my hub cluster is deployed in AWS. As it isn't a bare metal cluster,
 
 The related manifest for the install are located in the `hub` folder. The main manifest is `02-assistedserviceconfig.yaml` specifying the `AgentServiceConfig` definition, which defines the base RHCOS image to use for the server installation.
 
-We also create a `ClusterImageSet` to refer to OpenShift 4.8 version. This will be referenced by the spoke manifest to define what version of OpenShift to install.
+We also create a `ClusterImageSet` to refer to OpenShift 4.9 version. This will be referenced by the spoke manifest to define what version of OpenShift to install.
 
 Add your private key in the `hub/03-assisted-deployment-ssh-private-key.yaml` file (use the example), and then apply the folder. The private key will be in the resulting VM, and you will use the corresponding public key to ssh, if needed.
 
 Everything will be installed in the `open-cluster-management` namespace.
 
 ~~~
-$ oc apply -k hub
+$ kustomize build hub | oc apply -f - 
 configmap "assisted-service-config" deleted
 secret "assisted-deployment-ssh-private-key" deleted
 agentserviceconfig.agent-install.openshift.io "agent" deleted
-clusterimageset.hive.openshift.io "openshift-v4.8.0" deleted
+clusterimageset.hive.openshift.io "openshift-v4.9.0" deleted
 ~~~
+
+
+
 
 After view second, check the assisted service has been created
 
@@ -92,6 +95,8 @@ In my case `$CLUSTER_NAME.$DOMAIN_NAME = hub-adetalhouet.rhlteco.io`
 Here is a command to help make that change; make sure to replace `$CLUSTER_NAME.$DOMAIN_NAME` with yours. If you're on a mac, using `gsed` instead of `sed` to use the GNU sed binary.
 
 ~~~
+$ CLUSTER_NAME=hub-adetalhouet
+$ DOMAIN_NAME=rhlteco.io
 $ sed -i "s/hub-adetalhouet.rhtelco.io/$CLUSTER_NAME.$DOMAIN_NAME/g" metal-provisioner/02-ironic.yaml
 ~~~
 
@@ -149,7 +154,7 @@ pod/baremetal-operator-controller-manager-7477d5cd57-2cbmj   2/2     Running   0
 pod/capm3-ironic-6cc84ff99c-l5bpt                            5/5     Running   0          20m
 
 NAME             TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)                    AGE
-service/ironic   ClusterIP   172.30.59.7   <none>        5050/TCP,6385/TCP,80/TCP   20m
+service/ironic   ClusterIP   172.40.59.7   <none>        5050/TCP,6385/TCP,80/TCP   20m
 
 NAME                                                    READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.apps/baremetal-operator-controller-manager   1/1     1            1           20m
@@ -495,12 +500,12 @@ ECDSA key fingerprint is SHA256:N6wy/bQ5YeL01LsLci+IVztzRs8XFVeU4rYJIDGD8SU.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 Warning: Permanently added '192.168.123.5' (ECDSA) to the list of known hosts.
 Red Hat Enterprise Linux CoreOS 48.84.202107202156-0
-  Part of OpenShift 4.8, RHCOS is a Kubernetes native operating system
+  Part of OpenShift 4.9, RHCOS is a Kubernetes native operating system
   managed by the Machine Config Operator (`clusteroperator/machine-config`).
 
 WARNING: Direct SSH access to machines is not recommended; instead,
 make configuration changes via `machineconfig` objects:
-  https://docs.openshift.com/container-platform/4.8/architecture/architecture-rhcos.html
+  https://docs.openshift.com/container-platform/4.9/architecture/architecture-rhcos.html
 
 ---
 [core@sno ~]$
@@ -762,7 +767,7 @@ status:
       lastTransitionTime: '2021-08-01T18:47:08Z'
       message: >-
         The installation is in progress: Finalizing cluster installation.
-        Cluster version status: progressing, message: Working towards 4.8.2: 640
+        Cluster version status: progressing, message: Working towards 4.9.2: 640
         of 676 done (94% complete)
 --[/cut]--
 
@@ -825,7 +830,7 @@ Status:
   Conditions:
     Last Probe Time:          2021-07-30T03:25:00Z
     Last Transition Time:     2021-07-30T02:32:37Z
-    Message:                  The installation is in progress: Finalizing cluster installation. Cluster version status: available, message: Done applying 4.8.0
+    Message:                  The installation is in progress: Finalizing cluster installation. Cluster version status: available, message: Done applying 4.9.0
     Reason:                   InstallationInProgress
     Status:                   False
     Type:                     ClusterInstallCompleted
@@ -956,7 +961,7 @@ Status:
     Status:                   Unknown
     Type:                     RequirementsMet
   Install Started Timestamp:  2021-07-30T02:41:00Z
-  Install Version:            4.8.0
+  Install Version:            4.9.0
   Installed Timestamp:        2021-07-30T02:41:00Z
   Installer Image:            quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:eb3e6c54c4e2e07f95a9af44a5a1839df562a843b4ac9e1d5fb5bb4df4b4f7d6
 Events:                       <none>
