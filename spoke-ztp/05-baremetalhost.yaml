@@ -2,23 +2,23 @@
 apiVersion: metal3.io/v1alpha1
 kind: BareMetalHost
 metadata:
-  name: sno-ztp-bmh
-  namespace: sno-ztp
+  name: ca-montreal-node1
+  namespace: ca-montreal
   labels:
-    infraenvs.agent-install.openshift.io: "sno-ztp-infraenv"
+    infraenvs.agent-install.openshift.io: "ca-montreal"
   annotations:
     inspect.metal3.io: disabled
-    bmac.agent-install.openshift.io/hostname: "sno-pub"
+    bmac.agent-install.openshift.io/hostname: "ca-montreal-node1"
 spec:
   online: true
   # userData:
   #   name: bmh-userdata
   #   namespace: sno-ztp
   bmc:
-    address: redfish-virtualmedia+http://148.251.12.17:8000/redfish/v1/Systems/b6c92bbb-1e87-4972-b17a-12def3948891
+    address: redfish-virtualmedia+http://10.0.0.249:8000/redfish/v1/Systems/7e689341-84c6-4732-a1aa-2979e23385a5
     credentialsName: sno-secret
     disableCertificateVerification: true
-  bootMACAddress: 00:50:56:01:15:94
+  bootMACAddress: 52:54:00:d3:54:af
   automatedCleaningMode: disabled
 ---
 # dummy secret - it is not used by required by assisted service and bare metal operator
@@ -26,7 +26,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: sno-secret
-  namespace: sno-ztp
+  namespace: ca-montreal
 data:
   password: Ym9iCg==
   username: Ym9iCg==
