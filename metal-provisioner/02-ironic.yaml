@@ -186,7 +186,7 @@ metadata:
   name: ironic-http
   namespace: metal-provisioner
 spec:
-  host: ironic-http-metal-provisioner.apps.hub-adetalhouet.rhtelco.io
+  host: ironic-http-metal-provisioner.apps.prosper.sandbox1444.opentlc.com
   to:
     kind: Service
     name: ironic
@@ -201,7 +201,7 @@ metadata:
   name: ironic-api
   namespace: metal-provisioner
 spec:
-  host: ironic-api-metal-provisioner.apps.hub-adetalhouet.rhtelco.io
+  host: ironic-api-metal-provisioner.apps.prosper.sandbox1444.opentlc.com
   to:
     kind: Service
     name: ironic
@@ -216,7 +216,7 @@ metadata:
   name: ironic-inspector
   namespace: metal-provisioner
 spec:
-  host: ironic-inspector-metal-provisioner.apps.hub-adetalhouet.rhtelco.io
+  host: ironic-inspector-metal-provisioner.apps.prosper.sandbox1444.opentlc.com
   to:
     kind: Service
     name: ironic
@@ -270,21 +270,21 @@ metadata:
   namespace: metal-provisioner
 data:
   IRONIC_FAST_TRACK: 'true'
-  DEPLOY_KERNEL_URL: ironic-http-metal-provisioner.apps.hub-adetalhouet.rhtelco.io/images/ironic-python-agent.kernel
+  DEPLOY_KERNEL_URL: ironic-http-metal-provisioner.apps.prosper.sandbox1444.opentlc.com/images/ironic-python-agent.kernel
   RESTART_CONTAINER_CERTIFICATE_UPDATED: 'false'
   INSPECTOR_REVERSE_PROXY_SETUP: 'false'
   PROVISIONING_INTERFACE: ens5 # this is the interface on the host node - as Ironic is provide hostnetwork privilege, it will look for this interface to get its IP. Make sure it to update as per your environment.
-  IRONIC_INSPECTOR_URL: ironic-inspector-metal-provisioner.apps.hub-adetalhouet.rhtelco.io
+  IRONIC_INSPECTOR_URL: ironic-inspector-metal-provisioner.apps.prosper.sandbox1444.opentlc.com
   IRONIC_KERNEL_PARAMS: console=ttyS0
-  IRONIC_API_URL: ironic-api-metal-provisioner.apps.hub-adetalhouet.rhtelco.io
+  IRONIC_API_URL: ironic-api-metal-provisioner.apps.prosper.sandbox1444.opentlc.com
   DHCP_RANGE: '172.22.0.10,172.22.0.100' # not needed in our case but required by Ironic
   IRONIC_INSPECTOR_VLAN_INTERFACES: all
-  IRONIC_ENDPOINT: ironic-api-metal-provisioner.apps.hub-adetalhouet.rhtelco.io/v1/
-  DEPLOY_RAMDISK_URL: ironic-http-metal-provisioner.apps.hub-adetalhouet.rhtelco.io/images/ironic-python-agent.initramfs
-  IRONIC_HTTP_URL: ironic-http-metal-provisioner.apps.hub-adetalhouet.rhtelco.io
-  IRONIC_URL_HOST: ironic-http-metal-provisioner.apps.hub-adetalhouet.rhtelco.io
+  IRONIC_ENDPOINT: ironic-api-metal-provisioner.apps.prosper.sandbox1444.opentlc.com/v1/
+  DEPLOY_RAMDISK_URL: ironic-http-metal-provisioner.apps.prosper.sandbox1444.opentlc.com/images/ironic-python-agent.initramfs
+  IRONIC_HTTP_URL: ironic-http-metal-provisioner.apps.prosper.sandbox1444.opentlc.com
+  IRONIC_URL_HOST: ironic-http-metal-provisioner.apps.prosper.sandbox1444.opentlc.com
   HTTP_PORT: '6180'
-  IRONIC_INSPECTOR_ENDPOINT: ironic-inspector-metal-provisioner.apps.hub-adetalhouet.rhtelco.io/v1/
+  IRONIC_INSPECTOR_ENDPOINT: ironic-inspector-metal-provisioner.apps.prosper.sandbox1444.opentlc.com/v1/
 ---
 kind: ConfigMap
 apiVersion: v1
