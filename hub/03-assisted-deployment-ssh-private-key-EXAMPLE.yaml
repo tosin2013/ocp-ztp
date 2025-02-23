@@ -6,5 +6,5 @@ metadata:
   namespace: open-cluster-management
 stringData:
   ssh-privatekey: |-
-    YOUR_KEY
+    PLACEHOLDER_SSH_KEY
 type: Opaque

@@ -12,7 +12,7 @@ spec:
   clusterDeploymentRef:
     name: ca-montreal
   imageSetRef:
-    name: openshift-v4.11.9
+    name: openshift-v4.17.0
   # apiVIP: ""
   # ingressVIP: ""
   networking:

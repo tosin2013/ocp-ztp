@@ -55,7 +55,7 @@ Spec:
     Cluster ID:  575d4038-25cd-41c7-8744-f8aba3b19d80
     Infra ID:    24b2e5a7-6443-47ad-bbd3-61edf1e335f5
   Image Set Ref:
-    Name:  openshift-v4.8.0
+    Name:  openshift-v4.17.0
   Networking:
     Cluster Network:
       Cidr:         10.128.0.0/14

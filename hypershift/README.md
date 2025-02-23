@@ -83,10 +83,10 @@ oc patch provisioning provisioning-configuration --type merge -p '{"spec":{"watc
 ~~~
 export DB_VOLUME_SIZE="10Gi"
 export FS_VOLUME_SIZE="10Gi"
-export OCP_VERSION="4.10"
+export OCP_VERSION="4.17"
 export ARCH="x86_64"
 export OCP_RELEASE_VERSION=$(curl -s https://mirror.openshift.com/pub/openshift-v4/${ARCH}/clients/ocp/latest-${OCP_VERSION}/release.txt | awk '/machine-os / { print $2 }')
-export ISO_URL="https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/${OCP_VERSION}/4.10.16/rhcos-${OCP_VERSION}.16-${ARCH}-live.${ARCH}.iso"
+export ISO_URL="https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/${OCP_VERSION}/latest/rhcos-${OCP_VERSION}.0-${ARCH}-live.${ARCH}.iso"
 export ROOT_FS_URL="https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/${OCP_VERSION}/latest/rhcos-live-rootfs.${ARCH}.img"
 
 envsubst <<"EOF" | oc apply -f -
@@ -250,7 +250,7 @@ metadata:
 spec:
   fips: false
   release:
-    image: 'quay.io/openshift-release-dev/ocp-release:4.10.26-x86_64'
+    image: 'quay.io/openshift-release-dev/ocp-release:4.17.0-x86_64'
   dns:
     baseDomain: adetalhouet.ca
   controllerAvailabilityPolicy: SingleReplica
@@ -320,7 +320,7 @@ spec:
       agentLabelSelector:
         matchLabels: {}
   release:
-    image: quay.io/openshift-release-dev/ocp-release:4.10.26-x86_64
+    image: quay.io/openshift-release-dev/ocp-release:4.17.0-x86_64
 ~~~
 
 ### Import cluster in ACM

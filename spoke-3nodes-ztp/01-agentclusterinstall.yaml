@@ -12,7 +12,7 @@ spec:
   clusterDeploymentRef:
     name: ca-regina
   imageSetRef:
-    name: openshift-v4.10.10
+    name: openshift-v4.17.0
   apiVIP: "192.168.123.253"
   ingressVIP: "192.168.123.252"
   networking:
