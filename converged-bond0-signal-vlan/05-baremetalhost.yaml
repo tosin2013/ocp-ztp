@@ -1,0 +1,93 @@
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: ocp4-master-1
+  namespace: ocp4
+  labels:
+    infraenvs.agent-install.openshift.io: ocp4
+    agent-install.openshift.io/role: master
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: ocp4-master-1
+spec:
+  online: true
+  bmc:
+    address: ''
+    credentialsName: ocp4-master-1-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:19:04:74
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ocp4-master-1-secret
+  namespace: ocp4
+data:
+  username: ''
+  password: ''
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: ocp4-master-2
+  namespace: ocp4
+  labels:
+    infraenvs.agent-install.openshift.io: ocp4
+    agent-install.openshift.io/role: master
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: ocp4-master-2
+spec:
+  online: true
+  bmc:
+    address: ''
+    credentialsName: ocp4-master-2-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:6f:25:ec
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ocp4-master-2-secret
+  namespace: ocp4
+data:
+  username: ''
+  password: ''
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: ocp4-master-3
+  namespace: ocp4
+  labels:
+    infraenvs.agent-install.openshift.io: ocp4
+    agent-install.openshift.io/role: master
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: ocp4-master-3
+spec:
+  online: true
+  bmc:
+    address: ''
+    credentialsName: ocp4-master-3-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:3d:e5:d8
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ocp4-master-3-secret
+  namespace: ocp4
+data:
+  username: ''
+  password: ''
+type: Opaque

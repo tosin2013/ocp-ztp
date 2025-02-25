@@ -1,0 +1,24 @@
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  labels:
+    agentclusterinstalls.extensions.hive.openshift.io/location: TODO
+    networkType: static
+  name: ocp4
+  namespace: ocp4
+spec:
+  clusterRef:
+    name: ocp4
+    namespace: ocp4
+  sshAuthorizedKey: ''
+  agentLabelSelector:
+    matchLabels:
+      agentclusterinstalls.extensions.hive.openshift.io/location: TODO
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  nmStateConfigLabelSelector:
+    matchLabels:
+      cluster-name: ocp4-nmstate
+  additionalNTPSources:
+  - 216.239.35.0
+  - 216.239.35.4

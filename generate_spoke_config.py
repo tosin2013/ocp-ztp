@@ -1,3 +1,36 @@
+#!/usr/bin/env python3
+"""
+Generate OpenShift Zero Touch Provisioning (ZTP) configuration files for spoke clusters.
+
+Usage:
+    python3 generate_spoke_config.py \
+        --cluster-config /path/to/cluster.yml \
+        --nodes-config /path/to/nodes.yml \
+        --output-dir ./output \
+        --openshift-version 4.12 \
+        --ssh-key /path/to/id_rsa.pub \
+        [--cluster-name optional-cluster-name]
+
+Required arguments:
+    --cluster-config    : Path to YAML file containing cluster network configuration
+    --nodes-config      : Path to YAML file containing node configurations
+    --output-dir       : Directory where generated manifests will be written
+    --openshift-version: Version of OpenShift to deploy (e.g. 4.12)
+
+Optional arguments:
+    --ssh-key          : Path to SSH public key file (will generate new one if not provided)
+    --cluster-name     : Override cluster name from config file
+
+Generated files:
+    00-namespace.yaml
+    01-agentclusterinstall.yaml
+    02-clusterdeployment.yaml
+    03-nmstateconfig.yaml
+    04-spokeinfraenv.yaml
+    05-baremetalhost.yaml
+    07-kusterlet.yaml
+"""
+
 import yaml
 import os
 import argparse
@@ -386,3 +419,70 @@ def generate_kusterlet_yaml(cluster_name, output_dir):
                     'cloud': 'hybrid'
                 },
                 'applicationManager': {
+                    'enabled': True
+                },
+                'certPolicyController': {
+                    'enabled': True
+                },
+                'iamPolicyController': {
+                    'enabled': True
+                },
+                'policyController': {
+                    'enabled': True
+                },
+                'searchCollector': {
+                    'enabled': True
+                }
+            }
+        }
+    ]
+    
+    output_file = os.path.join(output_dir, "07-kusterlet.yaml")
+    with open(output_file, 'w') as f:
+        yaml.dump_all(configs, f, sort_keys=False, explicit_start=True)
+    print(f"Generated {output_file}")
+
+def main():
+    parser = argparse.ArgumentParser(description='Generate Spoke Cluster Configuration')
+    parser.add_argument('--cluster-config', required=True, help='Path to cluster configuration YAML')
+    parser.add_argument('--nodes-config', required=True, help='Path to nodes configuration YAML')
+    parser.add_argument('--output-dir', required=True, help='Output directory for generated files')
+    parser.add_argument('--openshift-version', required=True, help='OpenShift version (e.g. 4.12)')
+    parser.add_argument('--ssh-key', help='Path to SSH public key file')
+    parser.add_argument('--cluster-name', help='Override cluster name from config')
+    
+    args = parser.parse_args()
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(args.output_dir, exist_ok=True)
+    
+    # Load configurations
+    try:
+        with open(args.cluster_config, 'r') as f:
+            cluster_config = yaml.safe_load(f)
+        with open(args.nodes_config, 'r') as f:
+            nodes_config = yaml.safe_load(f)
+    except FileNotFoundError as e:
+        print(f"Error: Configuration file not found: {e}")
+        return
+    except yaml.YAMLError as e:
+        print(f"Error parsing YAML: {e}")
+        return
+        
+    # Use provided cluster name or get from config
+    cluster_name = args.cluster_name or cluster_config.get('cluster_name')
+    if not cluster_name:
+        print("Error: cluster_name not found in cluster.yml and not provided via --cluster-name")
+        return
+        
+    # Generate all configuration files
+    generate_namespace_yaml(cluster_name, args.output_dir)
+    generate_agentclusterinstall_yaml(cluster_config, nodes_config, args.output_dir, args.openshift_version, args.ssh_key)
+    generate_clusterdeployment_yaml(cluster_name, cluster_config, args.output_dir)
+    generate_nmstateconfig_yaml(nodes_config, args.output_dir, cluster_name, cluster_config)
+    generate_spokeinfraenv_yaml(cluster_name, args.ssh_key, cluster_config, args.output_dir)
+    generate_baremetalhost_yaml(cluster_name, nodes_config, args.output_dir)
+    generate_kusterlet_yaml(cluster_name, args.output_dir)
+
+if __name__ == '__main__':
+    main()

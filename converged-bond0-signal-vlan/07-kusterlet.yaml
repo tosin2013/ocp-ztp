@@ -1,0 +1,31 @@
+---
+apiVersion: cluster.open-cluster-management.io/v1
+kind: ManagedCluster
+metadata:
+  labels:
+    cloud: hybrid
+    name: ocp4
+  name: ocp4
+spec:
+  hubAcceptsClient: true
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: ocp4
+  namespace: ocp4
+spec:
+  clusterName: ocp4
+  clusterNamespace: ocp4
+  clusterLabels:
+    cloud: hybrid
+  applicationManager:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  iamPolicyController:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: true

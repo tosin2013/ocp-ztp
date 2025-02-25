@@ -1,0 +1,25 @@
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: ocp4
+  namespace: ocp4
+  labels:
+    agentclusterinstalls.extensions.hive.openshift.io/location: Factory
+  annotations:
+    agent-install.openshift.io/install-config-overrides: '{"networking":{"networkType":"OVNKubernetes"}}'
+spec:
+  clusterDeploymentRef:
+    name: ocp4
+  imageSetRef:
+    name: openshift-v4.17
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+    machineNetwork:
+    - cidr: 192.168.70.0/23
+  provisionRequirements:
+    controlPlaneAgents: 3
+  sshPublicKey: ssh-rsa CHANGEME
