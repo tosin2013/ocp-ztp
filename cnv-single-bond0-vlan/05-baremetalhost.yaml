@@ -1,0 +1,270 @@
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-ctlplane-0
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-ctlplane-0
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-ctlplane-0
+    credentialsName: lab-ctlplane-0-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:a1:b2:c3
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-ctlplane-0-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-ctlplane-1
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-ctlplane-1
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-ctlplane-1
+    credentialsName: lab-ctlplane-1-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:1a:2b:3c
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-ctlplane-1-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-ctlplane-2
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-ctlplane-2
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-ctlplane-2
+    credentialsName: lab-ctlplane-2-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:7a:8b:9c
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-ctlplane-2-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-worker-0
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-worker-0
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-worker-0
+    credentialsName: lab-worker-0-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:3a:4b:5c
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-worker-0-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-worker-1
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-worker-1
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-worker-1
+    credentialsName: lab-worker-1-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:9a:ab:bc
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-worker-1-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-worker-2
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-worker-2
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-worker-2
+    credentialsName: lab-worker-2-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:23:45:67
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-worker-2-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-worker-3
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-worker-3
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-worker-2
+    credentialsName: lab-worker-3-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:ef:01:23
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-worker-3-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-worker-4
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-worker-4
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-worker-4
+    credentialsName: lab-worker-4-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:ab:cd:ef
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-worker-4-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque
+---
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: lab-worker-5
+  namespace: raleigh-factory
+  labels:
+    infraenvs.agent-install.openshift.io: raleigh-factory
+  annotations:
+    inspect.metal3.io: disabled
+    bmac.agent-install.openshift.io/hostname: lab-worker-5
+spec:
+  online: true
+  bmc:
+    address: redfish+http://192.168.100.99:8000/redfish/v1/Systems/lab-worker-5
+    credentialsName: lab-worker-5-secret
+    disableCertificateVerification: true
+  bootMACAddress: 52:54:00:78:9a:bc
+  automatedCleaningMode: disabled
+  hardwareProfile: libvirt
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lab-worker-5-secret
+  namespace: raleigh-factory
+data:
+  username: YWRtaW4=
+  password: cGFzc3dvcmQ=
+type: Opaque

@@ -1,0 +1,396 @@
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-ctlplane-0
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.21
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:a1:b2:c3
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-ctlplane-1
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.22
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:1a:2b:3c
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-ctlplane-2
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.23
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:7a:8b:9c
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-worker-0
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.24
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:3a:4b:5c
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-worker-1
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.25
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:9a:ab:bc
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-worker-2
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.26
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:23:45:67
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-worker-3
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.27
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:ef:01:23
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-worker-4
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.28
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:ab:cd:ef
+---
+apiVersion: agent-install.openshift.io/v1beta1
+kind: NMStateConfig
+metadata:
+  name: raleigh-factory-lab-worker-5
+  namespace: raleigh-factory
+  labels:
+    cluster-name: raleigh-factory-nmstate
+spec:
+  config:
+    interfaces:
+    - name: enp1s0
+      state: up
+      type: ethernet
+      ipv4:
+        dhcp: false
+        enabled: true
+    - name: enp1s0.1925
+      state: up
+      type: vlan
+      vlan:
+        base-iface: enp1s0
+        id: 1925
+      ipv4:
+        address:
+        - ip: 192.168.62.29
+          prefix-length: 24
+        dhcp: false
+        enabled: true
+    dns-resolver:
+      config:
+        search:
+        - example.com
+        server:
+        - 192.168.122.165
+    routes:
+      config:
+      - destination: 0.0.0.0/0
+        next-hop-address: 192.168.62.1
+        next-hop-interface: enp1s0.1925
+        table-id: 254
+  interfaces:
+  - name: enp1s0
+    macAddress: 52:54:00:78:9a:bc

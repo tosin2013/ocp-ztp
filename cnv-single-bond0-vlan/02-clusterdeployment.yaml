@@ -1,0 +1,20 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: raleigh-factory
+  namespace: raleigh-factory
+spec:
+  clusterName: raleigh-factory
+  baseDomain: example.com
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: raleigh-factory
+    version: v1beta1
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          agentclusterinstalls.extensions.hive.openshift.io/location: Factory
+  pullSecretRef:
+    name: assisted-deployment-pull-secret

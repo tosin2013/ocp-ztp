@@ -1,0 +1,24 @@
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  labels:
+    agentclusterinstalls.extensions.hive.openshift.io/location: Factory
+    networkType: static
+  name: raleigh-factory
+  namespace: raleigh-factory
+spec:
+  clusterRef:
+    name: raleigh-factory
+    namespace: raleigh-factory
+  sshAuthorizedKey: ssh-rsa CHANGEME
+  agentLabelSelector:
+    matchLabels:
+      agentclusterinstalls.extensions.hive.openshift.io/location: Factory
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  nmStateConfigLabelSelector:
+    matchLabels:
+      cluster-name: raleigh-factory-nmstate
+  additionalNTPSources:
+  - 216.239.35.0
+  - 216.239.35.4
